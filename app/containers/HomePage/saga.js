@@ -3,7 +3,7 @@
  */
 
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { LOAD_REPOS, TRANSLATE_TEXT } from 'containers/App/constants';
+import { LOAD_REPOS, TRANSLATE_TEXT, API_KEY_YANDEX } from 'containers/App/constants';
 import { reposLoaded, repoLoadingError } from 'containers/App/actions';
 
 import request from 'utils/request';
@@ -26,9 +26,15 @@ export function* getRepos() {
   }
 }
 export function* translateWord(payload) {
+https://dictionary.yandex.net/api/v1/dicservice/lookup?key=APIkey&lang=en-ru&text=time
 
+  const text = payload && payload.obj && payload.obj.word;
+  const requestURL = `https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=${API_KEY_YANDEX}&lang=en-ru&text=${text}`;
   try {
-    console.log('payload', payload)
+    const translate = yield call(request, requestURL);
+    const array = translate && translate.def[0] && translate.def[0].tr.map(a=>a.text);
+    console.log('array ', array)
+
   } catch (err) {
     yield put(repoLoadingError(err));
   }
@@ -42,7 +48,7 @@ export default function* githubData() {
   // By using `takeLatest` only the result of the latest API call is applied.
   // It returns task descriptor (just like fork) so we can continue execution
   // It will be cancelled automatically on component unmount
-  
+
   yield takeLatest(TRANSLATE_TEXT, translateWord);
   // yield takeLatest(LOAD_REPOS, getRepos);
 }
