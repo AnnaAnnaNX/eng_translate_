@@ -17,7 +17,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
   constructor(props) {
     super(props);
     this.state = {
-      textUser: ''
+      textUser: 'cat dog mouse run read'
     };
 
   }
@@ -51,6 +51,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
               // alert(document.getElementById('textUser').value);
               let textUserValue = document.getElementById('textUser').value;
               this.setState({textUser: textUserValue});
+              this.props.onChangeUserText(this.state.textUser);
             }}>Ввести текст</button>
             <h2>Click on unknown words for translate</h2>
             <p>
@@ -64,6 +65,14 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                   </span>
                 )
               }
+            </p>
+            <p>
+            {
+              this.props.userArrayText.map(a=>{
+                return (
+                  <span key={a.id} onClick={()=>this.props.onTranslate(a)}>{a.word+' '}</span>)
+              })
+            }
             </p>
           </section>
           <section>

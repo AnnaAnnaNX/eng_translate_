@@ -10,3 +10,5 @@
  */
 
 export const CHANGE_USERNAME = 'boilerplate/Home/CHANGE_USERNAME';
+export const CHANGE_USERTEXT = 'boilerplate/Home/CHANGE_USERTEXT';
+export const TRANSLATE_TEXT = 'boilerplate/Home/TRANSLATE_TEXT';

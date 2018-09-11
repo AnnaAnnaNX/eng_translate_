@@ -11,11 +11,12 @@
  */
 import { fromJS } from 'immutable';
 
-import { CHANGE_USERNAME } from './constants';
+import { CHANGE_USERNAME, CHANGE_USERTEXT } from './constants';
 
 // The initial state of the App
 const initialState = fromJS({
-  username: ''
+  username: '',
+  text:[]
 });
 
 function homeReducer(state = initialState, action) {
@@ -23,6 +24,12 @@ function homeReducer(state = initialState, action) {
     case CHANGE_USERNAME:
       // Delete prefixed '@' from the github username
       return state.set('username', action.name.replace(/@/gi, ''));
+    case CHANGE_USERTEXT:
+      // Add user text
+      let text = action.text || '';
+      text = text.split(' ');
+      text = text.map((a, i)=>{return {id: i, word: a, translate: '', userChoise: -1}})
+      return state.set('text', text);
     default:
       return state;
   }

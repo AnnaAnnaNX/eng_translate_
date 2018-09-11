@@ -15,7 +15,7 @@
  *    }
  */
 
-import { CHANGE_USERNAME } from './constants';
+import { CHANGE_USERNAME, CHANGE_USERTEXT, TRANSLATE_TEXT } from './constants';
 
 /**
  * Changes the input field of the form
@@ -30,3 +30,16 @@ export function changeUsername(name) {
     name
   };
 }
+export function changeUserText(text) {
+  return {
+    type: CHANGE_USERTEXT,
+    text
+  };
+}
+export function translate(obj) {
+  return {
+    type: TRANSLATE_TEXT,
+    obj
+  };
+}
+

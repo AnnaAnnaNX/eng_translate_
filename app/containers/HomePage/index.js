@@ -9,13 +9,15 @@ import {
   makeSelectError
 } from 'containers/App/selectors';
 import { loadRepos } from '../App/actions';
-import { changeUsername } from './actions';
-import { makeSelectUsername } from './selectors';
+import { changeUsername, changeUserText, translate } from './actions';
+import { makeSelectUsername, makeSelectUserText } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import HomePage from './HomePage';
 
 const mapDispatchToProps = (dispatch) => ({
+  onChangeUserText: (text) => dispatch(changeUserText(text)),
+  onTranslate: (obj) => dispatch(translate(obj)),
   onChangeUsername: (evt) => dispatch(changeUsername(evt.target.value)),
   onSubmitForm: (evt) => {
     if (evt !== undefined && evt.preventDefault) evt.preventDefault();
@@ -27,7 +29,8 @@ const mapStateToProps = createStructuredSelector({
   repos: makeSelectRepos(),
   username: makeSelectUsername(),
   loading: makeSelectLoading(),
-  error: makeSelectError()
+  error: makeSelectError(),
+  userArrayText: makeSelectUserText(),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
