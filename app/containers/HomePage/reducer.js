@@ -11,7 +11,7 @@
  */
 import { fromJS } from 'immutable';
 
-import { CHANGE_USERNAME, CHANGE_USERTEXT } from './constants';
+import { CHANGE_USERNAME, CHANGE_USERTEXT, ADD_TRANSLATE } from './constants';
 
 // The initial state of the App
 const initialState = fromJS({
@@ -30,6 +30,10 @@ function homeReducer(state = initialState, action) {
       text = text.split(' ');
       text = text.map((a, i)=>{return {id: i, word: a, translate: '', userChoise: -1}})
       return state.set('text', text);
+    case ADD_TRANSLATE:
+    	console.log('state', state);
+    	console.log('action', action);
+    	return state;
     default:
       return state;
   }

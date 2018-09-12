@@ -16,11 +16,9 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
    */
   constructor(props) {
     super(props);
-    this.state = {
-      textUser: 'cat dog mouse run read'
-    };
-
+    this.state = {};
   }
+
   componentDidMount() {
     if (this.props.username && this.props.username.trim().length > 0) {
       this.props.onSubmitForm();
@@ -34,6 +32,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
       error,
       repos,
     };
+    const exampleText = 'cat fog run read fast fat';
 
     return (
       <article>
@@ -45,27 +44,14 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
           <section className="centered">
             <h2>Input text</h2>
             <textarea
-              id = "textUser">
+              id = "textUser">{exampleText}
             </textarea>
             <button onClick={()=>{
-              // alert(document.getElementById('textUser').value);
+              //alert(document.getElementById('textUser').value);
               let textUserValue = document.getElementById('textUser').value;
-              this.setState({textUser: textUserValue});
-              this.props.onChangeUserText(this.state.textUser);
+              this.props.onChangeUserText(textUserValue);
             }}>Ввести текст</button>
             <h2>Click on unknown words for translate</h2>
-            <p>
-              {
-                this.state.textUser &&
-                this.state.textUser
-                .split(' ')
-                .map(word => 
-                  <span onClick={()=>alert(word)}>
-                    {word+' '}
-                  </span>
-                )
-              }
-            </p>
             <p>
             {
               this.props.userArrayText.map(a=>{
@@ -97,18 +83,3 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     );
   }
 }
-
-HomePage.propTypes = {
-  loading: PropTypes.bool,
-  error: PropTypes.oneOfType([
-    PropTypes.object,
-    PropTypes.bool,
-  ]),
-  repos: PropTypes.oneOfType([
-    PropTypes.array,
-    PropTypes.bool,
-  ]),
-  onSubmitForm: PropTypes.func,
-  username: PropTypes.string,
-  onChangeUsername: PropTypes.func,
-};

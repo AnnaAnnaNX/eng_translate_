@@ -26,14 +26,14 @@ export function* getRepos() {
   }
 }
 export function* translateWord(payload) {
-https://dictionary.yandex.net/api/v1/dicservice/lookup?key=APIkey&lang=en-ru&text=time
 
   const text = payload && payload.obj && payload.obj.word;
   const requestURL = `https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=${API_KEY_YANDEX}&lang=en-ru&text=${text}`;
   try {
     const translate = yield call(request, requestURL);
     const array = translate && translate.def[0] && translate.def[0].tr.map(a=>a.text);
-    console.log('array ', array)
+    // console.log('array ', array)
+    console.log({id: payload.obj.id, translate: array})
 
   } catch (err) {
     yield put(repoLoadingError(err));
