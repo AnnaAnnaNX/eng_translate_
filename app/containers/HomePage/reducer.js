@@ -11,7 +11,7 @@
  */
 import { fromJS } from 'immutable';
 
-import { CHANGE_USERNAME, CHANGE_USERTEXT, ADD_TRANSLATE } from './constants';
+import { CHANGE_USERNAME, CHANGE_USERTEXT, ADD_TRANSLATE, ADD_TRANSLATE_TO_PAGE } from './constants';
 
 // The initial state of the App
 const initialState = fromJS({
@@ -34,6 +34,21 @@ function homeReducer(state = initialState, action) {
     	console.log('state', state);
     	console.log('action', action);
     	return state;
+    case ADD_TRANSLATE_TO_PAGE:
+    	let translate = action.obj;
+    	console.log('translate', translate);
+    	console.log('action', action);
+    	console.log('state', state.get('text'));
+    	let newArr = [];
+    	state.get('text').map((a,i)=>{
+    	console.log('a', a);
+    		if (translate.id == a.id) {
+    			a.translate = translate.translate;
+    			a.userChoise = 0;
+    		}
+    		newArr.push(a);
+    	})
+    	return state.set('text', newArr);
     default:
       return state;
   }

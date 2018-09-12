@@ -15,7 +15,7 @@
  *    }
  */
 
-import { CHANGE_USERNAME, CHANGE_USERTEXT, TRANSLATE_TEXT } from './constants';
+import { CHANGE_USERNAME, CHANGE_USERTEXT, TRANSLATE_TEXT, ADD_TRANSLATE_TO_PAGE } from './constants';
 
 /**
  * Changes the input field of the form
@@ -42,4 +42,9 @@ export function translate(obj) {
     obj
   };
 }
-
+export function addTranslateToPage(obj) {
+  return {
+    type: ADD_TRANSLATE_TO_PAGE,
+    obj
+  };
+}

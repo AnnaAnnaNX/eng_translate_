@@ -56,7 +56,21 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
             {
               this.props.userArrayText.map(a=>{
                 return (
-                  <span key={a.id} onClick={()=>this.props.onTranslate(a)}>{a.word+' '}</span>)
+                  <span 
+                    key={a.id} 
+                    onClick={()=>{if (!a.translate) this.props.onTranslate(a);}}
+                    className="block-word"
+                  >
+                    {
+                      a.userChoise != -1 &&
+                      (<span className="translate">
+                        {a.translate[a.userChoise]}
+                      </span>)
+                    }
+                    <span className="word">
+                      {a.word+' '}
+                    </span>
+                  </span>)
               })
             }
             </p>

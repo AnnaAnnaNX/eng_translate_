@@ -5,9 +5,11 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { LOAD_REPOS, TRANSLATE_TEXT, API_KEY_YANDEX } from 'containers/App/constants';
 import { reposLoaded, repoLoadingError } from 'containers/App/actions';
+import { addTranslateToPage } from './actions';
 
 import request from 'utils/request';
 import { makeSelectUsername } from 'containers/HomePage/selectors';
+
 
 /**
  * Github repos request/response handler
@@ -33,7 +35,8 @@ export function* translateWord(payload) {
     const translate = yield call(request, requestURL);
     const array = translate && translate.def[0] && translate.def[0].tr.map(a=>a.text);
     // console.log('array ', array)
-    console.log({id: payload.obj.id, translate: array})
+    console.log({id: payload.obj.id, translate: array});
+    yield put(addTranslateToPage({id: payload.obj.id, translate: array}));
 
   } catch (err) {
     yield put(repoLoadingError(err));
