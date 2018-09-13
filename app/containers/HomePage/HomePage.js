@@ -37,20 +37,25 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     return (
       <article>
         <Helmet>
-          <title>Home Page</title>
+          <title>Translate</title>
           <meta name="description" content="A React.js Boilerplate application homepage" />
         </Helmet>
         <div className="home-page">
           <section className="centered">
             <h2>Input text</h2>
             <textarea
-              id = "textUser">{exampleText}
+              id = "textUser"
+              className = 'inputUserText'
+            >
+            {exampleText}
             </textarea>
-            <button onClick={()=>{
+            <button
+              className = "inputUserTextButton"
+             onClick={()=>{
               //alert(document.getElementById('textUser').value);
               let textUserValue = document.getElementById('textUser').value;
               this.props.onChangeUserText(textUserValue);
-            }}>Ввести текст</button>
+            }}>Download text</button>
             <h2>Click on unknown words for translate</h2>
             <p>
             {
@@ -62,7 +67,7 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
                     className="block-word"
                   >
                     {
-                      a.userChoise != -1 &&
+                      a.translate &&
                       (<span className="translate">
                         {a.translate[a.userChoise]}
                       </span>)
@@ -74,23 +79,6 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
               })
             }
             </p>
-          </section>
-          <section>
-            <h2>Try me!</h2>
-            <form onSubmit={this.props.onSubmitForm}>
-              <label htmlFor="username">
-              Show Github repositories by
-                <span className="at-prefix">@</span>
-                <input
-                  id="username"
-                  type="text"
-                  placeholder="flexdinesh"
-                  value={this.props.username}
-                  onChange={this.props.onChangeUsername}
-                />
-              </label>
-            </form>
-            <ReposList {...reposListProps} />
           </section>
         </div>
       </article>
