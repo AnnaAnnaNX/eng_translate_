@@ -32,6 +32,7 @@
 
   .block-word {
     display: inline-block;
+    position: relative;
   }
 
   .word,
@@ -46,8 +47,11 @@
 
   .translate {
     font-size: 12px;
-    color: 'blue';
+    color: blue;
     padding-left: 5px;    
+    position: absolute;
+    left: 0;
+    top: -10px;
   }
 
   .inputUserText {
